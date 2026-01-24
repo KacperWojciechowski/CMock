@@ -13,7 +13,8 @@ RUN pacman -Syu --noconfirm && \
     base \
     base-devel \
     sudo \
-    bash
+    bash \
+    less
 
 ENV PATH="/usr/bin:$PATH"
 
