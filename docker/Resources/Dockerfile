@@ -82,6 +82,11 @@ RUN pacman -Syu --noconfirm \
 USER ${USERNAME}
 ENV HOME=/home/Dev
 
+# Seed the Docker image with CMock repository and its dependencies
+RUN git clone git@github.com:$GIT_USER_NAME/CMock.git /opt/cmock && \
+    cd /opt/cmock && \
+    ./vendor/bundle install
+
 # Install Vim cofiguration
 RUN sudo mkdir -p /usr/share/vim/vimfiles/autoload && \
     sudo curl -fLo /usr/share/vim/vimfiles/autoload/plug.vim \

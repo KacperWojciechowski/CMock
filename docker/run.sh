@@ -10,7 +10,9 @@ export MSYS_NO_PATHCONV=1
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 source "$SCRIPT_DIR/Resources/logging.sh"
 
-export $(grep -v '^#' .env | xargs)
+set -a
+source <(grep -v '^\s*#' $SCRIPT_DIR/.env | grep -v '^\s*$')
+set +a
 
 OS_TYPE="$(uname -s)"
 

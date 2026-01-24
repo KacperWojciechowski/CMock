@@ -23,10 +23,15 @@ log "User email: $(git config --global --get user.email || "(user.email not set)
 
 section "Searching for CMock forked repository"
 
-REPO_PATH=$(find -iname "CMock")
+CMOCK_REPO="/workspace/CMock"
+CMOCK_REFERENCE="/opt/CMock"
 
-if [[ -z $REPO_PATH ]]; then
-	git clone git@github.com:$GIT_USER_NAME/CMock.git
+if [[ ! -d "$CMOCK_REPO/.git" ]]; then
+	log "CMock repository not found in workspace. Seeding CMock into workspace volume"
+	cp -a "$CMOCK_REFERENCE" "$CMOCK_REPO"
+	success "CMock seeded successfully"
+else
+	success "CMock repository found in workspace"
 fi
 
 echo;

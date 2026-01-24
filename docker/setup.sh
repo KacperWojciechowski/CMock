@@ -9,6 +9,10 @@ CONTEXT_DIR="."
 SCRIPT_DIR="$(cd -- "$(dirname -- "$BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 source "$SCRIPT_DIR/Resources/logging.sh"
 
+set -a
+source <(grep -v '^\s*#' $SCRIPT_DIR/.env | grep -v '^\s*$')
+set +a
+
 section "Cleaning up dangling Docker volumes..."
 docker volume prune -f
 
@@ -27,6 +31,7 @@ echo "Building Docker image '$IMAGE_NAME' from $DOCKERFILE_PATH..."
 
 # Temporarily forward ssh to allow for cloning during image build
 DOCKER_BUILDKIT=1 docker build \
+	--build-arg GIT_USER_NAME=$GIT_USER_NAME \
 	-t "$IMAGE_NAME" \
 	-f "$DOCKERFILE_PATH" \
 	"$CONTEXT_DIR"
