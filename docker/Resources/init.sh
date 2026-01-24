@@ -29,6 +29,7 @@ CMOCK_REFERENCE="/opt/CMock"
 if [[ ! -d "$CMOCK_REPO/.git" ]]; then
 	log "CMock repository not found in workspace. Seeding CMock into workspace volume"
 	cp -a "$CMOCK_REFERENCE" "$CMOCK_REPO"
+	cd $CMOCK_REPO && git remote set-url origin git@github.com:$GIT_USER_NAME/CMock.git
 	success "CMock seeded successfully"
 else
 	success "CMock repository found in workspace"

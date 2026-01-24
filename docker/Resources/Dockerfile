@@ -2,6 +2,9 @@
 
 FROM archlinux:latest
 
+ARG GIT_USER_NAME="ThrowTheSwitch"
+ENV GIT_USER_NAME=${GIT_USER_NAME}
+
 # Set the locale
 ENV TERM=xterm-256color
 ENV STARSHIP_CONFIG=/etc/starship/starship.toml
@@ -79,13 +82,14 @@ RUN pacman -Syu --noconfirm \
     ruby-rake \
     ruby-bundler
 
+# Seed the Docker image with CMock repository and its dependencies
+RUN git clone "https://github.com/${GIT_USER_NAME}/CMock.git" /opt/CMock && \
+    cd /opt/CMock && \
+    bundle install && \
+    chown -R Dev:Dev /opt/CMock
+
 USER ${USERNAME}
 ENV HOME=/home/Dev
-
-# Seed the Docker image with CMock repository and its dependencies
-RUN git clone git@github.com:$GIT_USER_NAME/CMock.git /opt/cmock && \
-    cd /opt/cmock && \
-    bundle install
 
 # Install Vim cofiguration
 RUN sudo mkdir -p /usr/share/vim/vimfiles/autoload && \

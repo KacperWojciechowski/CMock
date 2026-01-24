@@ -6,8 +6,13 @@ IMAGE_NAME="cmock-dev-arch"
 DOCKERFILE_PATH="./Resources/Dockerfile"
 CONTEXT_DIR="."
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "$BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 source "$SCRIPT_DIR/Resources/logging.sh"
+
+if [[ ! -f "$SCRIPT_DIR/.env" ]]; then
+	error "No .env file present. Please create it and set GIT_USER_NAME and GIT_USER_EMAIL before proceeding"
+	exit 1
+fi
 
 set -a
 source <(grep -v '^\s*#' $SCRIPT_DIR/.env | grep -v '^\s*$')
