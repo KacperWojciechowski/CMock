@@ -114,9 +114,6 @@ COPY Resources/starship.toml /etc/starship/starship.toml
 
 RUN sudo chmod +x /opt/container-scripts/init.sh
 
-# Copy clang-format configuration
-COPY Resources/.clang-format /etc/clang-format/.clang-format
-
 # Configure the entrypoint
 WORKDIR /workspace
 ENTRYPOINT ["/usr/bin/fish", "-lc", "/opt/container-scripts/init.sh; exec fish"]
