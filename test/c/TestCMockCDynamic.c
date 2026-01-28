@@ -1,15 +1,9 @@
 /* =========================================================================
     CMock - Automatic Mock Generation for C
     ThrowTheSwitch.org
-    Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
+    Copyright (c) 2007-26 Mike Karlesky, Mark VanderVoord, & Greg Williams
     SPDX-License-Identifier: MIT
 ========================================================================= */
-
-/* ==========================================
-    CMock Project - Automatic Mock Generation for C
-    Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
-    [Released under MIT License. Please refer to license.txt for details]
-========================================== */
 
 #include "unity.h"
 #include "cmock.h"

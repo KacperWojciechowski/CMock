@@ -1,10 +1,9 @@
 # =========================================================================
 #   CMock - Automatic Mock Generation for C
 #   ThrowTheSwitch.org
-#   Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
+#   Copyright (c) 2007-26 Mike Karlesky, Mark VanderVoord, & Greg Williams
 #   SPDX-License-Identifier: MIT
 # =========================================================================
-
 
 require File.expand_path(File.dirname(__FILE__)) + "/../test_helper"
 require File.expand_path(File.dirname(__FILE__)) + '/../../lib/cmock_config'

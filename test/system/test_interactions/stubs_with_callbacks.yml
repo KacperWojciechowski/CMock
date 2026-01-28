@@ -1,7 +1,7 @@
 # =========================================================================
 #   CMock - Automatic Mock Generation for C
 #   ThrowTheSwitch.org
-#   Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
+#   Copyright (c) 2007-26 Mike Karlesky, Mark VanderVoord, & Greg Williams
 #   SPDX-License-Identifier: MIT
 # =========================================================================
 
@@ -119,13 +119,25 @@
         }
 
     - :pass: TRUE
-      :should: 'successfully exercise using some basic callbacks even if there were expects'
+      :should: 'successfully exercise using some basic callbacks, overriding previous expects'
       :code: |
         test()
         {
           custom_type exp = 500;
           foo_ExpectAndReturn(&exp, 10);
           foo_StubWithCallback((CMOCK_foo_CALLBACK)FooAndBarHelper);
+          bar_StubWithCallback((CMOCK_bar_CALLBACK)FooAndBarHelper);
+          TEST_ASSERT_EQUAL(12, function_b());
+        }
+
+    - :pass: TRUE
+      :should: 'successfully exercise using some basic callbacks, ignoring later expects'
+      :code: |
+        test()
+        {
+          custom_type exp = 500;
+          foo_StubWithCallback((CMOCK_foo_CALLBACK)FooAndBarHelper);
+          foo_ExpectAndReturn(&exp, 10);
           bar_StubWithCallback((CMOCK_bar_CALLBACK)FooAndBarHelper);
           TEST_ASSERT_EQUAL(12, function_b());
         }
